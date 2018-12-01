@@ -14,4 +14,10 @@ public class GreetingController {
         return "greeting";
     }
 
+    @GetMapping("/bugaga")
+    public String bugaga(@RequestParam(name="name", required=false, defaultValue="FPM-803") String name, Model model) {
+        model.addAttribute("name", name);
+        return "bugaga";
+    }
+
 }
