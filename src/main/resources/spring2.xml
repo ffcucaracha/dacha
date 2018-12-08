@@ -6,14 +6,15 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-          destroy-method="close">
-
-        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-        <property name="url" value="jdbc:oracle:thin:@//para-lab.ru:1521/lab.univer.omsk.su" />
-        <property name="username" value="AnnaS" />
-        <property name="password" value="1" />
-    </bean>
+    <bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="connectionInitSqls">
+			<list>
+				<value>PRAGMA foreign_keys = ON</value>
+			</list>
+		</property>
+		<property name="driverClassName" value="org.sqlite.JDBC" />
+		<property name="url" value="jdbc:sqlite:test.db" />
+	</bean>
 
     <!-- Hibernate 3 XML SessionFactory Bean definition-->
     <!-- 	<bean id="hibernate3SessionFactory"
@@ -42,14 +43,14 @@
         </property>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle8iDialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.Dialect</prop>
                 <prop key="hibernate.current_session_context_class">thread</prop>
                 <prop key="hibernate.show_sql">false</prop>
             </props>
         </property>
     </bean>
 
-    <bean id="paperDAO" class="oracle.PaperDAOImpl">
+    <bean id="paperDAO" class="sqllite.PaperDAOImpl">
         <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </bean>
 </beans>

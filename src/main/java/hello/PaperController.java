@@ -14,7 +14,8 @@ public class PaperController {
     @GetMapping("/papers/all")
     public String viewPapers(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        PaperDAO paperDAO = context.getBean(PaperDAO.class);
+        //ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring2.xml");
+		PaperDAO paperDAO = context.getBean(PaperDAO.class);
 
         List<Paper> list = paperDAO.getAllPapers();
 
