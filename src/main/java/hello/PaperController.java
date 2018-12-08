@@ -12,18 +12,20 @@ import paper.*;
 @Controller
 public class PaperController {
     @GetMapping("/papers/all")
-    public String viewPapers(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+    public String viewPapers(Model model) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         //ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring2.xml");
 		PaperDAO paperDAO = context.getBean(PaperDAO.class);
 
-        List<Paper> list = paperDAO.getAllPapers();
+        List<Paper> papers = paperDAO.getAllPapers();
 
-       String text = new String();
-        for(Paper p : list) {
+       /*String text = new String();
+        for(Paper p : papers) {
             text += "<tr>" + p + "</tr>";
-        }
-        model.addAttribute("text", text);
+        }*/
+        //model.addAttribute("text", text);
+
+        model.addAttribute("papers", papers);
         return "papers";
     }
 
