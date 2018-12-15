@@ -6,8 +6,8 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-import paper.*;
-
+import models.Paper;
+import dao.PaperDAO;
 
 public class PaperDAOImpl implements PaperDAO {
     private SessionFactory sessionFactory;

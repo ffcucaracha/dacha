@@ -7,7 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import paper.*;
+import models.Paper;
+import dao.PaperDAO;
 
 @Controller
 public class PaperController {
@@ -26,7 +27,7 @@ public class PaperController {
         //model.addAttribute("text", text);
 
         model.addAttribute("papers", papers);
-        return "papers";
+        return "papers/papers";
     }
 
    /* @GetMapping("/papers/init")

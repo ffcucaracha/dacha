@@ -4,7 +4,9 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
@@ -37,7 +39,7 @@
         <property name="dataSource" ref="dataSource" />
         <property name="annotatedClasses">
             <list>
-                <value>paper.Paper</value>
+                <value>models.Paper</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -52,4 +54,5 @@
     <bean id="paperDAO" class="oracle.PaperDAOImpl">
         <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </bean>
+
 </beans>

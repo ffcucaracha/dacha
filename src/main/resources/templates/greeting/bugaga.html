@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Как-нибудь уже назови</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css"
+          href="../webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" th:href="@{/css/main.css}"
+          href="../../css/main.css" />
+
+</head>
+<body>
+<header class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Мой сайт</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/bugaga">Тык сюда</a></li>
+                <li><a href="/papers/all">Статьи</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<div class="site-body">
+    <div class="container" align="center">
+       <button class="btn-asc" id="btn-bugaga">
+       </button>
+        <div class="bazinga">
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript"
+        src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+        th:scr="@{/js/main.js}"
+        src="../../js/main.js"></script>
+</body>
+<footer class="panel-footer">
+    <div class="container">
+        <p>2018 Nya Nya Nya</p>
+    </div>
+</footer>
+</html>
