@@ -20,21 +20,22 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/bugaga">Тык сюда</a></li>
-                <li class="active"><a href="/papers/all">Статьи</a></li>
+                <li><a href="/papers/all">Статьи</a></li>
+                <li class="active"><a href="/users/admin">Пользователи</a></li>
             </ul>
         </div>
     </div>
 </header>
 <div class="site-body">
     <div class="container" align="center">
-        <h3>Статьи</h3>
+        <h3>Пользователи</h3>
         <table class="table tbl-papers">
-            <tr><th>Ид</th><th>Название</th><th>Автор</th><th>Текст</th></tr>
-            <tr th:each="paper: ${papers}">
-                <td th:text="${paper.id}" />
-                <td th:text="${paper.name}" />
-                <td th:text="${paper.author}" />
-                <td th:text="${paper.text}" />
+            <tr><th>Ид</th><th>Название</th><th>Email</th><th>Роль</th></tr>
+            <tr th:each="user: ${users}">
+                <td th:text="${user.id}" />
+                <td th:text="${user.name}" />
+                <td th:text="${user.email}" />
+                <td th:text="${user.role}" />
             </tr>
         </table>
     </div>

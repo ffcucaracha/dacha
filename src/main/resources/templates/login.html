@@ -11,8 +11,7 @@
           href="../../css/main.css" />
 
 </head>
-<body>
-<header class="navbar navbar-inverse">
+<body><header class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/">Мой сайт</a>
@@ -27,25 +26,17 @@
         </div>
     </div>
 </header>
-<div class="site-body">
-    <div class="container">
-        <div class="starter-template" align="center">
-            <h1>Привеееет</h1>
-            <h2>
-                <span th:text="'Message: ' + ${message}"></span>
-            </h2>
-        </div>
 
-    </div>
+<div th:if="${param.error}">
+    Invalid username and password.
 </div>
-
-<script type="text/javascript"
-        src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
+<form th:action="@{/}" method="post">
+    <div><label> Логин : <input type="text" name="username"/> </label></div>
+    <div><label> Пароль: <input type="password" name="password"/> </label></div>
+    <div><input type="submit" value="Войти"/></div>
+</form>
 </body>
-<footer class="panel-footer">
-    <div class="container">
-        <p>2018 Nya Nya Nya</p>
-    </div>
-</footer>
 </html>

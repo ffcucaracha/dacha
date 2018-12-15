@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <link rel="stylesheet" type="text/css"
-          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+          href="../webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
 
     <link rel="stylesheet" th:href="@{/css/main.css}"
           href="../../css/main.css" />
@@ -20,28 +20,28 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/bugaga">Тык сюда</a></li>
-                <li><a href="/papers/all">Статьи</a></li>
+                <li class="active"><a href="/papers/all">Статьи</a></li>
                 <li><a href="/users/admin">Пользователи</a></li>
-                <li><p th:inline="text">Привет [[${#httpServletRequest.remoteUser}]]!</p></li>
             </ul>
         </div>
     </div>
 </header>
 <div class="site-body">
-    <div class="container">
-        <div class="starter-template" align="center">
-            <h1>Привеееет</h1>
-            <h2>
-                <span th:text="'Message: ' + ${message}"></span>
-            </h2>
-        </div>
-
+    <div class="container" align="center">
+        <h3>Статьи</h3>
+        <table class="table tbl-papers">
+            <tr><th>Ид</th><th>Название</th><th>Автор</th><th>Текст</th></tr>
+            <tr th:each="paper: ${papers}">
+                <td th:text="${paper.id}" />
+                <td th:text="${paper.name}" />
+                <td th:text="${paper.author}" />
+                <td th:text="${paper.text}" />
+            </tr>
+        </table>
     </div>
 </div>
-
 <script type="text/javascript"
         src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 </body>
 <footer class="panel-footer">
     <div class="container">
