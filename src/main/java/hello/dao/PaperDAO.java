@@ -1,7 +1,7 @@
-package dao;
+package hello.dao;
 
 import java.util.List;
-import model.Paper;
+import hello.model.Paper;
 
 public interface PaperDAO {
     public void savePaper(Paper paper);

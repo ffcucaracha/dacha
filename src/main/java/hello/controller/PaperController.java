@@ -1,4 +1,4 @@
-package controller;
+package hello.controller;
 
 import java.util.List;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -6,8 +6,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import model.Paper;
-import dao.PaperDAO;
+import hello.model.Paper;
+import hello.dao.PaperDAO;
 
 @Controller
 public class PaperController {

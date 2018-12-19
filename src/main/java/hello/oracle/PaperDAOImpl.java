@@ -1,4 +1,4 @@
-package oracle;
+package hello.oracle;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -6,8 +6,8 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-import models.Paper;
-import dao.PaperDAO;
+import hello.model.Paper;
+import hello.dao.PaperDAO;
 
 public class PaperDAOImpl implements PaperDAO {
     private SessionFactory sessionFactory;

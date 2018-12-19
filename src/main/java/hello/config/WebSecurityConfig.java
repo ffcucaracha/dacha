@@ -1,8 +1,8 @@
-package config;
+package hello.config;
 
 import javax.sql.DataSource;
 
-import service.UserDetailsServiceImpl;
+import hello.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
