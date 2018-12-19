@@ -1,4 +1,4 @@
-package models;
+package model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="USER")
+@Table(name="DACHA_USER")
 public class User {
     @Id
     @Column(name="id")
@@ -17,6 +17,9 @@ public class User {
 
     @Column(name="name")
     private String name;
+
+    @Column(name="password")
+    private String password;
 
     @Column(name="email")
     private String email;
@@ -40,6 +43,14 @@ public class User {
         this.name = name;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -59,5 +70,11 @@ public class User {
     @Override
     public String toString(){
         return "id="+id+", имя пользователя="+name+", роль="+role+" email="+email;
+    }
+
+    public boolean validatePassword(String _password)
+    {
+        if(this.password==_password) return true;
+        return false;
     }
 }

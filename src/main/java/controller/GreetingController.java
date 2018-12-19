@@ -1,16 +1,12 @@
-package hello;
+package controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Map;
-
-
-import java.security.Principal;
 
 
 @Controller
@@ -31,10 +27,5 @@ public class GreetingController {
         return "greeting/bugaga";
     }
 
-    /*@RequestMapping("/error")
-    public String error(Map<String, Object> model) {
-        model.put("message", this.message);
-        return "error";
-    }*/
 
 }

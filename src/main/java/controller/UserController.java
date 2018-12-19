@@ -1,4 +1,4 @@
-package hello;
+package controller;
 
 import java.util.List;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -6,8 +6,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import models.User;
+import model.User;
 import dao.UserDAO;
 
 @Controller
