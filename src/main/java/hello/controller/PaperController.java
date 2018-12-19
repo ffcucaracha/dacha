@@ -26,7 +26,7 @@ public class PaperController {
         //model.addAttribute("text", text);
 
         model.addAttribute("papers", papers);
-        return "paper/papers.jsp";
+        return "paper/papers";
     }
 
    /* @GetMapping("/papers/init")

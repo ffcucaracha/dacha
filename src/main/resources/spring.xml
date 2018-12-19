@@ -56,8 +56,9 @@
         <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </bean>
 
-    <bean id="userDAO" class="oracle.UserDAOImpl">
+    <bean id="userDAO" class="hello.oracle.UserDAOImpl">
         <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </bean>
+
 
 </beans>

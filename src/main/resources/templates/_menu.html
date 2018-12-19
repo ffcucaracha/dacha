@@ -1,18 +1,25 @@
-<div xmlns:th="http://www.thymeleaf.org"
-     style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <a th:href="@{/}">Home</a>
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
 
-    | &nbsp;
-
-    <a th:href="@{/userInfo}">User Info</a>
-
-    | &nbsp;
-
-    <a th:href="@{/admin}">Admin</a>
-
-    | &nbsp;
-
-    <a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a>
-
+</head>
+<div xmlns:th="http://www.thymeleaf.org" class="navbar navbar-inverse">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Мой сайт</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/bugaga">Тык сюда</a></li>
+                <li><a href="/papers/all">Статьи</a></li>
+                <li><a href="/users/admin">Пользователи</a></li>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/userInfo}">User Info</a></li>
+                <li><a th:href="@{/admin}">Admin</a></li>
+                <li><a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a></li>
+            </ul>
+        </div>
+    </div>
 </div>

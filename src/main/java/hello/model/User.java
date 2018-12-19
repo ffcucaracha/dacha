@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="DACHA_USER")
+@Table(name="AppUser")
 public class User {
     @Id
     @Column(name="id")
@@ -18,14 +18,15 @@ public class User {
     @Column(name="name")
     private String name;
 
-    @Column(name="password")
-    private String password;
+    /*@Column(name="password")
+    private String password;*/
 
-    @Column(name="email")
+    /*@Column(name="email")
     private String email;
 
     @Column(name="role")
     private String role;
+    */
 
     public int getId() {
         return id;
@@ -43,7 +44,7 @@ public class User {
         this.name = name;
     }
 
-    public String getPassword() {
+    /*public String getPassword() {
         return password;
     }
 
@@ -65,16 +66,11 @@ public class User {
 
     public void setRole(String text) {
         this.role = role;
-    }
+    }*/
 
     @Override
     public String toString(){
-        return "id="+id+", имя пользователя="+name+", роль="+role+" email="+email;
+        return "id="+id+", имя пользователя="+name;
     }
 
-    public boolean validatePassword(String _password)
-    {
-        if(this.password==_password) return true;
-        return false;
-    }
 }
