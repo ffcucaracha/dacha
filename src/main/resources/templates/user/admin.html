@@ -18,12 +18,10 @@
     <div class="container" align="center">
         <h3>Пользователи</h3>
         <table class="table tbl-papers">
-            <tr><th>Ид</th><th>Название</th><th>Email</th><th>Роль</th></tr>
+            <tr><th>Ид</th><th>Название</th></tr>
             <tr th:each="user: ${users}">
                 <td th:text="${user.id}" />
                 <td th:text="${user.name}" />
-                <td th:text="${user.email}" />
-                <td th:text="${user.role}" />
             </tr>
         </table>
     </div>

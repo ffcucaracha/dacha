@@ -11,11 +11,11 @@ import javax.persistence.Table;
 @Table(name="AppUser")
 public class User {
     @Id
-    @Column(name="id")
+    @Column(name="user_id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="name")
+    @Column(name="user_name")
     private String name;
 
     /*@Column(name="password")
