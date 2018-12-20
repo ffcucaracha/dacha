@@ -25,6 +25,7 @@ public class AppUserDAO {
             query.setParameter("userName", userName);
 
             return (AppUser) query.getSingleResult();
+
         } catch (NoResultException e) {
             return null;
         }

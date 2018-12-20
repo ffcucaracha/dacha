@@ -1,11 +1,7 @@
 package hello.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.sql.Blob;
 
 @Entity
 @Table(name="PAPER")
@@ -24,6 +20,10 @@ public class Paper {
 
     @Column(name="text")
     private String text;
+
+    @Lob @Basic(fetch = FetchType.LAZY)
+    @Column(name="content_file")
+    private byte[] content_file;
 
     public int getId() {
         return id;
@@ -47,6 +47,14 @@ public class Paper {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public byte[] getContent_file() {
+        return content_file;
+    }
+
+    public void setContent_file(byte[] content) {
+        this.content_file = content;
     }
 
     public String getText() {

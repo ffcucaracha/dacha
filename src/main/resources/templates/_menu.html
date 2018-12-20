@@ -15,10 +15,11 @@
                 <li><a href="/bugaga">Тык сюда</a></li>
                 <li><a href="/papers/all">Статьи</a></li>
                 <li><a href="/users/admin">Пользователи</a></li>
-                <li><a th:href="@{/}">Home</a></li>
-                <li><a th:href="@{/userInfo}">User Info</a></li>
-                <li><a th:href="@{/admin}">Admin</a></li>
-                <li><a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a></li>
+                <li><a href="/role/admin">Роли</a></li>
+                <li><a th:href="@{/index}">Страничка</a></li>
+                <li><a th:href="@{/userInfo}">Инфа для юзеров</a></li>
+                <li><a th:href="@{/admin}">Администрирование</a></li>
+                <li><a th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Выйти</a></li>
             </ul>
         </div>
     </div>

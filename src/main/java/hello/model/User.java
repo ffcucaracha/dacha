@@ -8,15 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="AppUser")
+@Table(name="APP_USER")
 public class User {
     @Id
     @Column(name="user_id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private int id;
+    private int user_id;
 
     @Column(name="user_name")
-    private String name;
+    private String user_name;
 
     /*@Column(name="password")
     private String password;*/
@@ -28,20 +28,20 @@ public class User {
     private String role;
     */
 
-    public int getId() {
-        return id;
+    public int getUser_id() {
+        return user_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUser_id(int id) {
+        this.user_id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUser_name() {
+        return user_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUser_name(String name) {
+        this.user_name = name;
     }
 
     /*public String getPassword() {
@@ -70,7 +70,7 @@ public class User {
 
     @Override
     public String toString(){
-        return "id="+id+", имя пользователя="+name;
+        return "id="+user_id+", имя пользователя="+user_name;
     }
 
 }

@@ -40,7 +40,9 @@
         <property name="annotatedClasses">
             <list>
                 <value>hello.model.Paper</value>
-                <value>hello.model.User</value>
+                <value>hello.entity.AppUser</value>
+                <value>hello.entity.AppRole</value>
+                <value>hello.entity.UserRole</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -57,6 +59,14 @@
     </bean>
 
     <bean id="userDAO" class="hello.oracle.UserDAOImpl">
+        <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </bean>
+
+    <bean id="appRoleDAO" class="hello.oracle.AppRoleDAOImpl">
+        <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
+    </bean>
+
+    <bean id="userRoleDAO" class="hello.oracle.UserRoleDAOImpl">
         <property name="sessionFactory" ref="hibernate3AnnotatedSessionFactory" />
     </bean>
 

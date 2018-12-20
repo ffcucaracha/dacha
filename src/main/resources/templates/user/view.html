@@ -19,7 +19,7 @@
         <h3>Пользователи</h3>
         <table class="table tbl-papers">
             <tr><th>Ид</th><th>Название</th></tr>
-            <tr th:each="user: ${users}">
+            <tr>
                 <td th:text="${user.user_id}" />
                 <td th:text="${user.user_name}" />
             </tr>

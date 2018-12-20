@@ -8,33 +8,33 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "App_Role", //
+@Table(name = "APP_ROLE", //
         uniqueConstraints = { //
                 @UniqueConstraint(name = "APP_ROLE_UK", columnNames = "Role_Name") })
 public class AppRole {
 
     @Id
     @GeneratedValue
-    @Column(name = "Role_Id", nullable = false)
-    private Long roleId;
+    @Column(name = "role_id", nullable = false)
+    private int role_id;
 
-    @Column(name = "Role_Name", length = 30, nullable = false)
-    private String roleName;
+    @Column(name = "role_name", length = 30, nullable = false)
+    private String role_name;
 
-    public Long getRoleId() {
-        return roleId;
+    public int getRole_id() {
+        return role_id;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setRole_id(int roleId) {
+        this.role_id = roleId;
     }
 
-    public String getRoleName() {
-        return roleName;
+    public String getRole_name() {
+        return role_name;
     }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
+    public void setRole_name(String roleName) {
+        this.role_name = roleName;
     }
 
 }
