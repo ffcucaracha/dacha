@@ -1,42 +1,57 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-        <head>
-            <title>Как-нибудь уже назови</title>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css"
+          href="../webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" th:href="@{/css/main.css}"
+          href="../../css/main.css" />
+    <title>Дача</title>
+</head>
 
-            <link rel="stylesheet" type="text/css"
-                  href="../webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-
-            <link rel="stylesheet" th:href="@{/css/main.css}"
-                  href="../../css/main.css" />
-
-        </head>
 <body>
 <th:block th:include="/_menu"></th:block>
+<div class="site-body container">
 
-<div class="site-body">
-    <div class="container" align="center">
         <h3 th:text="${paper.name}"/>
         <table class="table tbl-papers">
             <tr >
                 <td th:text="Автор" /><td th:text="${paper.author}" />
             </tr>
             <tr>
-                <td th:text="${paper.text}" />
-                <td><a class="btn btn-success custom-width" th:href="@{/paper/download-document}">Скачать картинку</a></td>
+                <td colspan="2" th:text="${paper.text}" />
             </tr>
         </table>
-        <div>
-            <img th:src="@{/paper/image}" alt="Здесь должна быть картинка =("/>
-        </div>
-    </div>
+
+    <h4>Файлы</h4>
+    <table class="table tbl-papers">
+        <tr th:each="file: ${files}">
+            <td th:text="${file.fileName}" />
+            <td><img th:src="@{/paper/download-document}+'?id='+${file.upload_id}" alt="Здесь должна быть картинка =(" width="100px" height="100px"/></td>
+            <td><form method="post" th:action="@{/paper/download-document}">
+                    <input type="text" name="id" th:value="${file.upload_id}" hidden="hidden">
+                <button type="submit" class="btn btn-success" value="Загрузить">Загрузить</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <form method="post" th:action="@{/paper/upload}" enctype="multipart/form-data">
+        <td><input type="text" name="paper_id" hidden="hidden" th:value="${paper.id}"/></td>
+        <table border="0">
+            <tr>
+                <td>Выберите файл:</td>
+                <td><input type="file" name="filesUpload" /></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center"><input class="btn btn-success"type="submit" value="Загрузить" /></td>
+            </tr>
+        </table>
+    </form>
+
 </div>
 <script type="text/javascript"
         src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
-<footer class="panel-footer">
-    <div class="container">
-        <p>2018 Nya Nya Nya</p>
-    </div>
-</footer>
+<th:block th:include="/_footer"></th:block>
 </html>

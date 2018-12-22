@@ -2,6 +2,9 @@ package hello.controller;
 
 import java.io.IOException;
 import java.util.List;
+
+import hello.dao.FilesUploadDAO;
+import hello.model.FilesUpload;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import org.springframework.stereotype.Controller;
@@ -18,103 +21,118 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 @Controller
 public class PaperController {
-    @GetMapping("/papers/all")
-    public String viewPapers(Model model) {
+    @GetMapping("/paper/admin")
+    public String admin(Model model) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        //ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring2.xml");
 		PaperDAO paperDAO = context.getBean(PaperDAO.class);
 
         List<Paper> papers = paperDAO.getAllPapers();
 
-       /*String text = new String();
-        for(Paper p : papers) {
-            text += "<tr>" + p + "</tr>";
-        }*/
-        //model.addAttribute("text", text);
-
         model.addAttribute("papers", papers);
-        return "paper/papers";
+        model.addAttribute("new_paper",new Paper());
+        return "paper/admin";
     }
 
     @RequestMapping("/paper/save")
-    public String savePaper(@RequestParam(name="file", required=false, defaultValue="75") MultipartFile file, Model model)
+    public String save(@RequestParam(name="name") String name,@RequestParam(name="author") String author,@RequestParam(name="text") String text)
     {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         PaperDAO paperDAO = context.getBean(PaperDAO.class);
 
         Paper paper = new Paper();
-        paper.setName("try");
-        paper.setAuthor("anna");
-        paper.setText("lalala");
-        paper.setContent_file(file);
+        paper.setName(name);
+        paper.setAuthor(author);
+        paper.setText(text);
 
-
-        String message = "nothing";
-        try{
-            paperDAO.savePaper(paper);
-            message = "сохранение прошло успешно";
-        } catch (Exception e) {
-            message = "сохранение не удалось";
-        } finally {
-            model.addAttribute("message", message);
-            return "/index";
-        }
-
-
+        paperDAO.savePaper(paper);
+        return "redirect:admin";
     }
+
+
+    /*
+    @RequestMapping(value = "paper/doUpload")
+    public String handleFileUpload(HttpServletRequest request, @RequestParam MultipartFile fileUpload) throws Exception {
+        if (fileUpload != null) {
+            ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+            //ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring2.xml");
+            PaperDAO paperDAO = context.getBean(PaperDAO.class);
+
+            System.out.println("Saving file: " + fileUpload.getOriginalFilename());
+
+                Paper paper = new Paper();
+                paper.setName("c картинкой");
+                paper.setAuthor("zzz");
+                paper.setText("yyyyyyy");
+                //paper.setContent_file(fileUpload.getBytes());
+                paperDAO.savePaper(paper);
+        }
+        return "paper/papers";
+    }*/
 
     @RequestMapping("paper/view")
     public String view(@RequestParam(name="id", required=false, defaultValue="75") int id, Model model)
     {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         PaperDAO paperDAO = context.getBean(PaperDAO.class);
+        FilesUploadDAO filesUploadDAO = context.getBean(FilesUploadDAO.class);
 
         Paper paper = paperDAO.getPaperById(id);
         model.addAttribute("paper", paper);
 
-        return "paper/view";
+        List<FilesUpload> files = filesUploadDAO.getAllFilesFromPaper(id);
+        model.addAttribute("files",files);
+
+         return "paper/view";
     }
 
-   /* @GetMapping("/papers/init")
-    public String init() {
-        Paper paper = new Paper();
-        paper.setName("Food");
-        paper.setAuthor("Anna");
-        paper.setText("llalalalalalal");
+    @RequestMapping("paper/upload")
+    public String upload(@RequestParam(name="paper_id") int paper_id,
+                         @RequestParam(name="filesUpload") MultipartFile fileUpload) throws Exception
+    {
+        if (fileUpload != null){// && fileUpload.length > 0) {
+            ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+            FilesUploadDAO fileUploadDAO = context.getBean(FilesUploadDAO.class);
+            //for (CommonsMultipartFile aFile : fileUpload){
 
-        PaperDAO.save(paper);
+                FilesUpload uploadFile = new FilesUpload();
+                uploadFile.setPaper_id(paper_id);
+                uploadFile.setFileName(fileUpload.getOriginalFilename());
+                uploadFile.setData(fileUpload.getBytes());
+                fileUploadDAO.save(uploadFile);
+           // }
+        }
+        return "redirect:admin";
+    }
 
-    }*/
 
     @RequestMapping("paper/download-document")
-    public String downloadDocument(@RequestParam(name="name", required=false, defaultValue="FPM-803") String name, Model model, HttpServletResponse response) throws IOException {
+    public String downloadDocument(@RequestParam(name="id") int id, HttpServletResponse response) throws IOException {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        PaperDAO paperDAO = context.getBean(PaperDAO.class);
+        FilesUploadDAO fileUploadDAO = context.getBean(FilesUploadDAO.class);
 
-        Paper paper = paperDAO.getPaperById(75);
-        response.setContentType("image/png");
-        response.setContentLength(paper.getContent_file().length);
-        response.setHeader("Content-Disposition","attachment; filename=\"" + paper.getName() +"\"");
+        FilesUpload file = fileUploadDAO.getFileById(id);
+        response.setContentType(file.getDataType());
+        response.setContentLength(file.getData().length);
+        response.setHeader("Content-Disposition","attachment; filename=\"" + file.getFileName() +"\"");
 
-        FileCopyUtils.copy(paper.getContent_file(), response.getOutputStream());
+        FileCopyUtils.copy(file.getData(), response.getOutputStream());
 
-        return "redirect:/papers";
+        return "redirect:admin";
     }
 
     @RequestMapping("paper/image")
-    public void showImage(@RequestParam("id") Integer itemId, HttpServletResponse response, HttpServletRequest request) throws ServletException, IOException {
+    public void showImage(@RequestParam("id") int id, HttpServletResponse response, HttpServletRequest request) throws ServletException, IOException {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        PaperDAO paperDAO = context.getBean(PaperDAO.class);
+        FilesUploadDAO fileUploadDAO = context.getBean(FilesUploadDAO.class);
 
-        Paper paper = paperDAO.getPaperById(75);
+        FilesUpload file = fileUploadDAO.getFileById(id);
 
-        response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
-        response.setContentLength(paper.getContent_file().length);
-        response.getOutputStream().write(paper.getContent_file());
+        response.setContentType(file.getDataType());
+        response.getOutputStream().write(file.getData());
         //Content-Type: text/html; charset=utf-8
-
 
         response.getOutputStream().close();
     }

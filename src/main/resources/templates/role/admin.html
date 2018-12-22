@@ -1,21 +1,19 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Как-нибудь уже назови</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
     <link rel="stylesheet" type="text/css"
           href="../webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
-
     <link rel="stylesheet" th:href="@{/css/main.css}"
           href="../../css/main.css" />
-
+    <title>Дача</title>
 </head>
+
 <body>
 <th:block th:include="/_menu"></th:block>
 
-<div class="site-body">
-    <div class="container" align="center">
+<div class="site-body container">
+
         <h3>Роли</h3>
         <table class="table tbl-papers">
             <tr><th>Роль</th></tr>
@@ -23,14 +21,10 @@
                 <td th:text="${role}" />
             </tr>
         </table>
-    </div>
+        <a class="btn btn-success" th:href="@{/role/save}">Добавить роль</a>
 </div>
 <script type="text/javascript"
         src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
-<footer class="panel-footer">
-    <div class="container">
-        <p>2018 Nya Nya Nya</p>
-    </div>
-</footer>
+<th:block th:include="/_footer"></th:block>
 </html>

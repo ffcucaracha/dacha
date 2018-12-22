@@ -7,10 +7,10 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-import hello.entity.AppUser;
-import hello.dao.UserDAO;
+import hello.model.AppUser;
+import hello.dao.AppUserDAO;
 
-public class UserDAOImpl implements UserDAO {
+public class AppUserDAOImpl implements AppUserDAO {
     private SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sessionFactory) {
@@ -21,7 +21,7 @@ public class UserDAOImpl implements UserDAO {
     public void saveUser(AppUser u) {
         Session session = this.sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
-        session.persist(u);
+        session.save(u);
         tx.commit();
         session.close();
     }

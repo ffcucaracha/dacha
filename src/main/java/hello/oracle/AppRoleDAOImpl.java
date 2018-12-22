@@ -7,8 +7,7 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-import hello.entity.UserRole;
-import hello.entity.AppRole;
+import hello.model.AppRole;
 import hello.dao.AppRoleDAO;
 
 public class AppRoleDAOImpl implements AppRoleDAO{
@@ -20,13 +19,6 @@ public class AppRoleDAOImpl implements AppRoleDAO{
 
     @Override
     public List<String> getRoleNames(int userId) {
-        /*String sql = "Select ur.appRole.roleName from " + UserRole.class.getName() + " ur " //
-                + " where ur.appUser.userId = :userId ";*/
-
-        //Query query = this.entityManager.createQuery(sql, String.class);
-        //query.setParameter("userId", userId);
-        //return query.getResultList();
-
         Session session = this.sessionFactory.openSession();
         Query query = session.createQuery("select ur.appRole.role_name from UserRole ur where ur.appUser.user_id = :userid");
         query.setParameter("userid",userId);
@@ -35,6 +27,27 @@ public class AppRoleDAOImpl implements AppRoleDAO{
         session.close();
         //AppUser appUser = user_l.get(0);
         return roles;
+    }
+
+    @Override
+    public List<AppRole> getAppRoles()
+    {
+        Session session = this.sessionFactory.openSession();
+        List<AppRole> roles = session.createQuery("from AppRole").list();
+        session.close();
+        return roles;
+    }
+
+    @Override
+    public void saveAppRole(AppRole appRole)
+    {
+        Session session = this.sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        session.save(appRole);
+
+        transaction.commit();
+        session.close();
     }
 
 }

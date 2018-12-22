@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <link rel="stylesheet" type="text/css"
+          href="../webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <link rel="stylesheet" th:href="@{/css/main.css}"
+          href="../../css/main.css" />
+
+    <title>Дача</title>
+
+</head>
+<body>
+<th:block th:include="/_menu"></th:block>
+
+<div class="site-body container" align="center">
+    <h3>Статьи</h3>
+        <table class="table tbl-papers">
+            <tr><th>Ид</th><th>Название</th><th>Автор</th><th>Текст</th><th></th></tr>
+            <tr th:each="paper: ${papers}">
+                <td th:text="${paper.id}" />
+                <td th:text="${paper.name}" />
+                <td th:text="${paper.author}" />
+                <td th:text="${paper.text}" />
+                <td><a class="btn btn-success custom-width" href="/paper/view">Просмотр</a></td>
+            </tr>
+            <tr>
+                <form action="#" th:action="@{/paper/save}" th:object="${new_paper}" method="post">
+                    <td></td>
+                    <td><input type="text" th:field="*{name}" /></td>
+                    <td><input type="text" th:field="*{author}" /></td>
+                    <td> <input type="text" th:field="*{text}" /></td>
+                    <td><input type="submit" value="Добавить" class="btn btn-success" /></td>
+                </form>
+            </tr>
+        </table>
+
+    <br>
+    <button class="btn btn-success"><a th:href="@{/paper/download-document}">Скачать картинку</a></button>
+
+</div>
+<script type="text/javascript"
+        src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+<th:block th:include="/_footer"></th:block>
+
+</html>

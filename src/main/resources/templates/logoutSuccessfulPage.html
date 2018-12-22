@@ -1,14 +1,24 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Logout</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" th:href="@{/css/main.css}"
+          href="../../css/main.css" />
+    <title>Дача</title>
 </head>
 
 <body>
-<!-- Include _menu.html -->
-<th:block th:include="/_menu"></th:block>
+    <th:block th:include="/_menu"></th:block>
 
-<h1>Logout Successful!</h1>
+    <div class="site-body container">
+
+        <h1>Logout Successful!</h1>
+
+    </div>
 </body>
+
+<th:block th:include="/_footer"></th:block>
 
 </html>

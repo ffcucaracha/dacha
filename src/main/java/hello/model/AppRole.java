@@ -1,20 +1,15 @@
-package hello.entity;
+package hello.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "APP_ROLE", //
-        uniqueConstraints = { //
-                @UniqueConstraint(name = "APP_ROLE_UK", columnNames = "Role_Name") })
+@Table(name = "APP_ROLE")
 public class AppRole {
 
     @Id
-    @GeneratedValue
     @Column(name = "role_id", nullable = false)
     private int role_id;
 
@@ -35,6 +30,12 @@ public class AppRole {
 
     public void setRole_name(String roleName) {
         this.role_name = roleName;
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.role_id+" "+this.role_name;
     }
 
 }

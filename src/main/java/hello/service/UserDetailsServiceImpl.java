@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hello.dao.AppRoleDAO;
-import hello.dao.UserDAO;
-import hello.entity.AppUser;
-import hello.oracle.AppRoleDAOImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import hello.dao.AppUserDAO;
+import hello.model.AppUser;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -21,7 +19,7 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     //@Autowired
-    //private UserDAO appUserDAO;
+    //private AppUserDAO appUserDAO;
 
     //@Autowired
     //private AppRoleDAOImpl appRoleDAO;
@@ -31,20 +29,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //AppUser appUser = this.appUserDAO.findUserAccount(userName);
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
         //ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring2.xml");
-        UserDAO userDAO = context.getBean(UserDAO.class);
+        AppUserDAO appUserDAO = context.getBean(AppUserDAO.class);
 
         AppRoleDAO appRoleDAO = context.getBean(AppRoleDAO.class);
 
 
-        AppUser appUser = userDAO.getUserByUsername(userName);
+        AppUser appUser = appUserDAO.getUserByUsername(userName);
 
 
         if (appUser == null) {
-            System.out.println("User not found! " + userName);
-            throw new UsernameNotFoundException("User " + userName + " was not found in the database");
+            throw new UsernameNotFoundException("Пользователь " + userName + " не найден");
         }
-
-        System.out.println("Found User: " + appUser);
 
         // [ROLE_USER, ROLE_ADMIN,..]
         List<String> roleNames = appRoleDAO.getRoleNames(appUser.getUser_id());

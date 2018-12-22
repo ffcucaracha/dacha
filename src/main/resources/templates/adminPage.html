@@ -1,22 +1,30 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:utext="${title}"></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css"
+          href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" th:href="@{/css/main.css}"
+          href="../../css/main.css" />
+    <title>Дача</title>
 </head>
+
 <body>
-<!-- Include _menu.html -->
-<th:block th:include="/_menu"></th:block>
+    <th:block th:include="/_menu"></th:block>
 
-<h2>Admin Page</h2>
-<h3>Welcome :
-    <span th:utext="${#request.userPrincipal.name}"></span>
-</h3>
-<b>Эта страница видна только админам</b>
+    <div class="site-body container">
+        <h2>Admin Page</h2>
+        <h3>Welcome :
+            <span th:utext="${#request.userPrincipal.name}"></span>
+         </h3>
+        <b>Эта страница видна только админам</b>
 
-<br/><br/>
+        <br/><br/>
 
-<div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
-
+        <div th:if="${userInfo != null}" th:utext="${userInfo}"></div>
+    </div>
 </body>
+
+<th:block th:include="/_footer"></th:block>
 
 </html>

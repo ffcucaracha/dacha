@@ -1,15 +1,15 @@
 package hello.model;
 
-import javax.persistence.*;
-import java.sql.Blob;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-@Table(name="PAPER")
+@Table(name = "PAPER")
 public class Paper {
-
     @Id
     @Column(name="id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
 
     @Column(name="author")
@@ -20,10 +20,6 @@ public class Paper {
 
     @Column(name="text")
     private String text;
-
-    @Lob @Basic(fetch = FetchType.LAZY)
-    @Column(name="content_file")
-    private byte[] content_file;
 
     public int getId() {
         return id;
@@ -49,17 +45,7 @@ public class Paper {
         this.author = author;
     }
 
-    public byte[] getContent_file() {
-        return content_file;
-    }
-
-    public void setContent_file(byte[] content) {
-        this.content_file = content;
-    }
-
-    public String getText() {
-        return text;
-    }
+    public String getText() { return text; }
 
     public void setText(String text) {
         this.text = text;

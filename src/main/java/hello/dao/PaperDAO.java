@@ -1,6 +1,5 @@
 package hello.dao;
 
-import java.sql.Blob;
 import java.util.List;
 import hello.model.Paper;
 
