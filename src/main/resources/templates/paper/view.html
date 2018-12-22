@@ -27,7 +27,10 @@
     <table class="table tbl-papers">
         <tr th:each="file: ${files}">
             <td th:text="${file.fileName}" />
-            <td><img th:src="@{/paper/download-document}+'?id='+${file.upload_id}" alt="Здесь должна быть картинка =(" width="100px" height="100px"/></td>
+            <td>
+                <img th:id="'open-dialog-'+${file.upload_id}" th:src="@{/paper/download-document}+'?id='+${file.upload_id}" alt="Здесь должна быть картинка =(" width="100px" height="100px"/>
+                <div hidden="hidden" th:id="'dialog-'+${file.upload_id}"><img th:src="@{/paper/download-document}+'?id='+${file.upload_id}" alt="Здесь должна быть картинка =(" width="200px" height="200px"/></div>
+            </td>
             <td><form method="post" th:action="@{/paper/download-document}">
                     <input type="text" name="id" th:value="${file.upload_id}" hidden="hidden">
                 <button type="submit" class="btn btn-success" value="Загрузить">Загрузить</button>
@@ -50,8 +53,12 @@
     </form>
 
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript"
-        src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript"
+        th:scr="@{/js/main.js}"
+        src="../../js/main.js"></script></body>
 </body>
 <th:block th:include="/_footer"></th:block>
 </html>
