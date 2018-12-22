@@ -19,12 +19,21 @@
     <h3>Статьи</h3>
         <table class="table tbl-papers">
             <tr><th>Ид</th><th>Название</th><th>Автор</th><th>Текст</th><th></th></tr>
+            <tr>
+                <form action="#" th:action="@{/paper/admin}" method="post">
+                    <td></td>
+                    <td></td>
+                    <td><input type="text" name="author"/></td>
+                    <td></td>
+                    <td><input type="submit" value="Найти" class="btn btn-success" /></td>
+                </form>
+            </tr>
             <tr th:each="paper: ${papers}">
                 <td th:text="${paper.id}" />
                 <td th:text="${paper.name}" />
                 <td th:text="${paper.author}" />
                 <td th:text="${paper.text}" />
-                <td><a class="btn btn-success custom-width" href="/paper/view">Просмотр</a></td>
+                <td><a class="btn btn-success custom-width" th:href="@{/paper/view} +'?id='+${paper.id}">Просмотр</a></td>
             </tr>
             <tr>
                 <form action="#" th:action="@{/paper/save}" th:object="${new_paper}" method="post">

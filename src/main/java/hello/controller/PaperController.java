@@ -24,13 +24,17 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class PaperController {
-    @GetMapping("/paper/admin")
-    public String admin(Model model) {
+    @RequestMapping("/paper/admin")
+    public String admin(@RequestParam(name="author", required=false, defaultValue="no") String author,Model model) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
 		PaperDAO paperDAO = context.getBean(PaperDAO.class);
 
         List<Paper> papers = paperDAO.getAllPapers();
 
+		if(!author.equals("no"))
+        {
+            papers = paperDAO.getPapersByAuthor(author);
+        }
         model.addAttribute("papers", papers);
         model.addAttribute("new_paper",new Paper());
         return "paper/admin";

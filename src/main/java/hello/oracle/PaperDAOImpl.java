@@ -48,4 +48,13 @@ public class PaperDAOImpl implements PaperDAO {
         return paper;
     }
 
+    @Override
+    public List<Paper> getPapersByAuthor(String author)
+    {
+        Session session = this.sessionFactory.openSession();
+        List<Paper> paperList = session.createQuery("from Paper where author = :author").setParameter("author",author).list();
+        session.close();
+        return paperList;
+    }
+
 }

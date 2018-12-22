@@ -9,5 +9,6 @@ public interface PaperDAO {
     //public void updatePaper(Paper paper);
    // public void deletePaper(int id);
     public List<Paper> getAllPapers();
+    public List<Paper> getPapersByAuthor(String author);
 
 }
